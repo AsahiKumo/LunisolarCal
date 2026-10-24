@@ -1,0 +1,125 @@
+# ==========================
+# Pixi / Conda
+# ==========================
+# pixi 环境目录（保留配置文件）
+.pixi/*
+!.pixi/config.toml
+# pixi.lock 建议提交到版本库，因此不忽略
+
+# ==========================
+# Python
+# ==========================
+# 字节码 / 缓存
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# 打包 / 分发
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller / 可执行文件
+*.manifest
+*.spec
+
+# 测试 / 覆盖率
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# 虚拟环境
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# 类型检查 / lint 缓存
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+.pylint.d/
+
+# ==========================
+# VS Code
+# ==========================
+# 忽略工作区个性化配置，但保留团队共享的配置
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+!*.code-workspace
+
+# ==========================
+# 操作系统 / 编辑器临时文件
+# ==========================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.fuse_hidden*
+
+# 编辑器备份
+*.swp
+*.swo
+.idea/
+*.bak
+*.tmp
+
+# ==========================
+# 日志 / 其他
+# ==========================
+*.log
+logs/
+
+# 本地功能计划
+/TODO.local.md
+

@@ -1,0 +1,26 @@
+[workspace]
+authors = ["AsahiKumo"]
+channels = ["conda-forge"]
+name = "LunisolarCal"
+platforms = ["win-64"]
+version = "1.3.0"
+license = "MIT"
+license-file = "LICENSE"
+
+[tasks]
+cal = "python -B -m lunisolar_cal"
+test = "python -B -m unittest discover -s tests -v"
+build = { cmd = "python -B tools/build_windows.py", description = "生成 Windows 桌面目录包和 ZIP 压缩包" }
+designer = { cmd = '"$CONDA_PREFIX/Library/lib/qt6/bin/designer.exe" --python-help', env = { QT_PLUGIN_PATH = "$CONDA_PREFIX/Library/lib/qt6/plugins" }, description = "打开 Qt Widgets Designer" }
+linguist = { cmd = '"$CONDA_PREFIX/Library/lib/qt6/bin/linguist.exe"', env = { QT_PLUGIN_PATH = "$CONDA_PREFIX/Library/lib/qt6/plugins" }, description = "打开 Qt Linguist 翻译编辑器" }
+lupdate = { cmd = '"$CONDA_PREFIX/Library/lib/qt6/bin/lupdate.exe" -tr-function-alias translate+=source_text', description = "提取或更新待翻译文字" }
+lrelease = { cmd = '"$CONDA_PREFIX/Library/lib/qt6/bin/lrelease.exe"', description = "将翻译源文件编译为 QM 文件" }
+
+[dependencies]
+python = "3.11.*"
+pip = "*"
+pyside6 = ">=6.8, <7"
+pyinstaller = ">=6,<7"
+
+[pypi-dependencies]
+sxtwl = ">=2.0.7, <3"
