@@ -69,6 +69,24 @@ class Ui_LsConvWindow(object):
 
         self.horizontalLayout_3.addWidget(self.langCombo)
 
+        self.themeLabel = QLabel(self.langRow)
+        self.themeLabel.setObjectName(u"themeLabel")
+
+        self.horizontalLayout_3.addWidget(self.themeLabel)
+
+        self.themeCombo = QComboBox(self.langRow)
+        self.themeCombo.addItem("")
+        self.themeCombo.addItem("")
+        self.themeCombo.addItem("")
+        self.themeCombo.addItem("")
+        self.themeCombo.addItem("")
+        self.themeCombo.addItem("")
+        self.themeCombo.addItem("")
+        self.themeCombo.setObjectName(u"themeCombo")
+        self.themeCombo.setSizeAdjustPolicy(QComboBox.SizeAdjustPolicy.AdjustToContents)
+
+        self.horizontalLayout_3.addWidget(self.themeCombo)
+
         self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
         self.horizontalLayout_3.addItem(self.horizontalSpacer_5)
@@ -232,7 +250,8 @@ class Ui_LsConvWindow(object):
         self.verticalLayout.addWidget(self.resultLabel)
 
         self.verticalLayout.setStretch(5, 1)
-        QWidget.setTabOrder(self.langCombo, self.calCombo)
+        QWidget.setTabOrder(self.langCombo, self.themeCombo)
+        QWidget.setTabOrder(self.themeCombo, self.calCombo)
         QWidget.setTabOrder(self.calCombo, self.yearSpin)
         QWidget.setTabOrder(self.yearSpin, self.monthSpin)
         QWidget.setTabOrder(self.monthSpin, self.daySpin)
@@ -257,6 +276,15 @@ class Ui_LsConvWindow(object):
         self.langCombo.setItemText(0, QCoreApplication.translate("LsConvWindow", u"\u7b80\u4f53\u4e2d\u6587", None))
         self.langCombo.setItemText(1, QCoreApplication.translate("LsConvWindow", u"English", None))
         self.langCombo.setItemText(2, QCoreApplication.translate("LsConvWindow", u"\u8ddf\u968f\u7cfb\u7edf", None))
+
+        self.themeLabel.setText(QCoreApplication.translate("LsConvWindow", u"\u4e3b\u9898\uff1a", None))
+        self.themeCombo.setItemText(0, QCoreApplication.translate("LsConvWindow", u"\u8ddf\u968f\u7cfb\u7edf", None))
+        self.themeCombo.setItemText(1, QCoreApplication.translate("LsConvWindow", u"\u6d45\u8272", None))
+        self.themeCombo.setItemText(2, QCoreApplication.translate("LsConvWindow", u"\u6df1\u8272", None))
+        self.themeCombo.setItemText(3, QCoreApplication.translate("LsConvWindow", u"Latte\uff08\u6d45\u8272\uff09", None))
+        self.themeCombo.setItemText(4, QCoreApplication.translate("LsConvWindow", u"Frapp\u00e9\uff08\u6df1\u8272\uff09", None))
+        self.themeCombo.setItemText(5, QCoreApplication.translate("LsConvWindow", u"Macchiato\uff08\u6df1\u8272\uff09", None))
+        self.themeCombo.setItemText(6, QCoreApplication.translate("LsConvWindow", u"Mocha\uff08\u6df1\u8272\uff09", None))
 
         self.aboutButton.setText(QCoreApplication.translate("LsConvWindow", u"\u5173\u4e8e", None))
         self.calLabel.setText(QCoreApplication.translate("LsConvWindow", u"\u8f93\u5165\u5386\u6cd5\uff1a", None))

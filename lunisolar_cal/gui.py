@@ -13,12 +13,16 @@ from . import (
     lunisolar_to_solar,
 )
 from .formatting import format_lunisolar, format_solar, format_calendar_error
+from .themes import ThemeController
 
 class LsConvWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.ui = Ui_LsConvWindow()
         self.ui.setupUi(self)
+        self._themes = ThemeController(
+            QApplication.instance(), self.ui.convButton, self.ui.resultLabel,
+        )
         self._translator = QTranslator(self)
         self._copy_text = ""
         self._copy_timer = QTimer(self)
@@ -43,6 +47,8 @@ class LsConvWindow(QWidget):
             self.on_language_changed
         )
         self.on_language_changed(self.ui.langCombo.currentIndex())
+        self.ui.themeCombo.currentIndexChanged.connect(self.on_theme_changed)
+        self.on_theme_changed(self.ui.themeCombo.currentIndex())
     
     def setup_keyboard(self):
         self._shortcuts = []
@@ -141,6 +147,9 @@ class LsConvWindow(QWidget):
             if language == "en":
                 return 1
         return 1
+
+    def on_theme_changed(self, index):
+        self._themes.apply(index)
     
     def on_language_changed(self, index):
         app = QApplication.instance()

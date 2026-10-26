@@ -6,6 +6,7 @@ from importlib.metadata import version as package_version
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -27,6 +28,19 @@ DOCS = (
 )
 
 
+def windows_version(version):
+    """Keep the display version while using numeric Windows version fields."""
+    match = re.fullmatch(r"(\d+(?:\.\d+){0,3})((?:a|b|rc|pre)\d+)?", version)
+    if match is None:
+        raise ValueError("Expected a release such as 1.3.1 or a prerelease such as 1.3.1pre1.")
+    numbers = tuple(int(part) for part in match.group(1).split("."))
+    if any(part > 65535 for part in numbers):
+        raise ValueError("Windows version components must be between 0 and 65535.")
+    numbers += (0,) * (4 - len(numbers))
+    flags = 0x2 if match.group(2) else 0  # VS_FF_PRERELEASE
+    return numbers, flags
+
+
 def make_assets():
     """Generate the entry point, Windows icon, and executable version metadata."""
     from PySide6.QtGui import QGuiApplication, QIcon
@@ -41,12 +55,9 @@ def make_assets():
     if not QIcon(str(svg)).pixmap(256, 256).save(str(icon), "ICO"):
         raise RuntimeError("Unable to generate the Windows icon.")
 
-    version = tuple(int(part) for part in __version__.split("."))
-    if not 1 <= len(version) <= 4 or any(not 0 <= part <= 65535 for part in version):
-        raise ValueError("Windows versions require one to four integers from 0 to 65535.")
-    version += (0,) * (4 - len(version))
+    version, flags = windows_version(__version__)
     metadata = VSVersionInfo(
-        ffi=FixedFileInfo(filevers=version, prodvers=version, fileType=1),
+        ffi=FixedFileInfo(filevers=version, prodvers=version, flags=flags, fileType=1),
         kids=[
             StringFileInfo([StringTable("040904B0", [
                 StringStruct("CompanyName", "AsahiKumo"),
@@ -192,6 +203,7 @@ def main():
     for filename in DOCS:
         shutil.copy2(ROOT / filename, bundle / filename)
     shutil.copytree(ROOT / "licenses", bundle / "licenses", dirs_exist_ok=True)
+    shutil.copytree(ROOT / "docs" / "images", bundle / "docs" / "images", dirs_exist_ok=True)
     copy_component_materials(bundle)
     archive = Path(shutil.make_archive(
         str(DIST / f"{NAME}-{__version__}-win64"), "zip", root_dir=DIST, base_dir=NAME,

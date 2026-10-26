@@ -131,80 +131,116 @@
     </message>
     <message>
         <location filename="../ui/lsconv.ui" line="103"/>
+        <location filename="../ui/lsconv.ui" line="122"/>
         <source>跟随系统</source>
         <translation>Follow system</translation>
     </message>
     <message>
+        <location filename="../ui/lsconv.ui" line="111"/>
+        <source>主题：</source>
+        <translation>Theme:</translation>
+    </message>
+    <message>
+        <location filename="../ui/lsconv.ui" line="127"/>
+        <source>浅色</source>
+        <translation>Light</translation>
+    </message>
+    <message>
+        <location filename="../ui/lsconv.ui" line="132"/>
+        <source>深色</source>
+        <translation>Dark</translation>
+    </message>
+    <message>
+        <location filename="../ui/lsconv.ui" line="137"/>
+        <source>Latte（浅色）</source>
+        <translation>Latte (Light)</translation>
+    </message>
+    <message>
         <location filename="../ui/lsconv.ui" line="142"/>
+        <source>Frappé（深色）</source>
+        <translation>Frappé (Dark)</translation>
+    </message>
+    <message>
+        <location filename="../ui/lsconv.ui" line="147"/>
+        <source>Macchiato（深色）</source>
+        <translation>Macchiato (Dark)</translation>
+    </message>
+    <message>
+        <location filename="../ui/lsconv.ui" line="152"/>
+        <source>Mocha（深色）</source>
+        <translation>Mocha (Dark)</translation>
+    </message>
+    <message>
+        <location filename="../ui/lsconv.ui" line="191"/>
         <source>输入历法：</source>
         <translation>Input calendar:</translation>
     </message>
     <message>
-        <location filename="../ui/lsconv.ui" line="156"/>
+        <location filename="../ui/lsconv.ui" line="205"/>
         <source>公历</source>
         <translation>Solar</translation>
     </message>
     <message>
-        <location filename="../ui/lsconv.ui" line="161"/>
+        <location filename="../ui/lsconv.ui" line="210"/>
         <source>农历</source>
         <translation>Lunisolar</translation>
     </message>
     <message>
-        <location filename="../ui/lsconv.ui" line="191"/>
+        <location filename="../ui/lsconv.ui" line="240"/>
         <source>中文农历表示</source>
         <translation>Chinese lunisolar notation</translation>
     </message>
     <message>
-        <location filename="../ui/lsconv.ui" line="223"/>
+        <location filename="../ui/lsconv.ui" line="272"/>
         <source>今天</source>
         <translation>Today</translation>
     </message>
     <message>
-        <location filename="../ui/lsconv.ui" line="246"/>
+        <location filename="../ui/lsconv.ui" line="295"/>
         <source>年份：</source>
         <translation>Year:</translation>
     </message>
     <message>
-        <location filename="../ui/lsconv.ui" line="259"/>
+        <location filename="../ui/lsconv.ui" line="308"/>
         <source>月份：</source>
         <translation>Month:</translation>
     </message>
     <message>
-        <location filename="../ui/lsconv.ui" line="272"/>
+        <location filename="../ui/lsconv.ui" line="321"/>
         <source>日期：</source>
         <translation>Day:</translation>
     </message>
     <message>
-        <location filename="../ui/lsconv.ui" line="318"/>
+        <location filename="../ui/lsconv.ui" line="367"/>
         <source>闰月（农历）</source>
         <translation>Leap month (lunisolar)</translation>
     </message>
     <message>
-        <location filename="../ui/lsconv.ui" line="351"/>
+        <location filename="../ui/lsconv.ui" line="400"/>
         <source>转换</source>
         <translation>Convert</translation>
     </message>
     <message>
-        <location filename="../gui.py" line="27"/>
-        <location filename="../gui.py" line="96"/>
-        <location filename="../gui.py" line="126"/>
-        <location filename="../ui/lsconv.ui" line="371"/>
+        <location filename="../gui.py" line="29"/>
+        <location filename="../gui.py" line="100"/>
+        <location filename="../gui.py" line="130"/>
+        <location filename="../ui/lsconv.ui" line="420"/>
         <source>复制结果</source>
         <translation>Copy result</translation>
     </message>
     <message>
-        <location filename="../gui.py" line="118"/>
+        <location filename="../gui.py" line="122"/>
         <source>已复制</source>
         <translation>Copied</translation>
     </message>
     <message>
-        <location filename="../gui.py" line="124"/>
-        <location filename="../ui/lsconv.ui" line="402"/>
+        <location filename="../gui.py" line="128"/>
+        <location filename="../ui/lsconv.ui" line="451"/>
         <source>等待转换</source>
         <translation>Waiting for conversion</translation>
     </message>
     <message>
-        <location filename="../gui.py" line="165"/>
+        <location filename="../gui.py" line="172"/>
         <source>&lt;h3&gt;公农历转换&lt;/h3&gt;&lt;p&gt;版本：{version}&lt;br&gt;作者：朝曦凝云AsahiKumo&lt;br&gt;项目许可证：MIT&lt;/p&gt;&lt;p&gt;基于 sxtwl 的公历、农历双向转换工具。&lt;/p&gt;&lt;p&gt;开发中使用 OpenAI Codex 辅助编程、调试、文档整理和图标制作。&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/AsahiKumo/LunisolarCal&quot;&gt;项目主页&lt;/a&gt;&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Solar-Lunisolar Converter&lt;/h3&gt;
 &lt;p&gt;Version: {version}&lt;br&gt;Author: 朝曦凝云AsahiKumo&lt;br&gt;Project license: MIT&lt;/p&gt;
@@ -213,39 +249,39 @@
 &lt;p&gt;&lt;a href=&quot;https://github.com/AsahiKumo/LunisolarCal&quot;&gt;Project homepage&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gui.py" line="172"/>
-        <location filename="../ui/lsconv.ui" line="130"/>
+        <location filename="../gui.py" line="179"/>
+        <location filename="../ui/lsconv.ui" line="179"/>
         <source>关于</source>
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../gui.py" line="175"/>
+        <location filename="../gui.py" line="182"/>
         <source>确定</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../gui.py" line="179"/>
-        <location filename="../gui.py" line="196"/>
+        <location filename="../gui.py" line="186"/>
+        <location filename="../gui.py" line="207"/>
         <source>许可说明</source>
         <translation>Licenses</translation>
     </message>
     <message>
-        <location filename="../gui.py" line="188"/>
+        <location filename="../gui.py" line="199"/>
         <source>项目许可证（MIT）</source>
         <translation>Project license (MIT)</translation>
     </message>
     <message>
-        <location filename="../gui.py" line="189"/>
+        <location filename="../gui.py" line="200"/>
         <source>第三方组件与许可</source>
         <translation>Third-party components and licenses</translation>
     </message>
     <message>
-        <location filename="../gui.py" line="202"/>
+        <location filename="../gui.py" line="214"/>
         <source>关闭</source>
         <translation>Close</translation>
     </message>
     <message>
-        <location filename="../gui.py" line="211"/>
+        <location filename="../gui.py" line="224"/>
         <source>无法读取文件：{path}
 {error}</source>
         <translation>Unable to read file: {path}

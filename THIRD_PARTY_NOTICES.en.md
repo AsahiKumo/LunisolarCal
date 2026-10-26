@@ -2,9 +2,9 @@
 
 [简体中文](THIRD_PARTY_NOTICES.md) | English
 
-This project uses the third-party software listed below. Each component retains its original copyright notices and license terms; the project's [MIT license](LICENSE) does not change those terms. Full license texts are included in the [licenses](licenses/) directory.
+This project uses the third-party software and color data listed below. Each component retains its original copyright notices and license terms; the project's [MIT license](LICENSE) does not change those terms. Full license texts are included in the [licenses](licenses/) directory.
 
-The versions below correspond to the current 64-bit Windows Pixi environment. See `pixi.lock` for exact versions. Last checked: 2026-10-24.
+The software versions below correspond to the current 64-bit Windows Pixi environment. See `pixi.lock` for exact versions. Software versions last checked: 2026-10-24; the Catppuccin palette source and check date are documented in its own section.
 
 | Component | Version | Purpose | License and full text |
 | --- | --- | --- | --- |
@@ -15,6 +15,7 @@ The versions below correspond to the current 64-bit Windows Pixi environment. Se
 | pip | 26.2.2 | Package management tool in the environment | [MIT](licenses/pip-MIT.txt) |
 | PyInstaller | 6.22.3 | Windows packaging tool | [GPLv2 with a bootloader exception](https://pyinstaller.org/en/stable/license.html) |
 | FreeType | 2.14.3 | Qt font-rendering dependency | [FTL](licenses/freetype-FTL.txt) |
+| Catppuccin palette | Palette data (2026-10-26) | Four custom color themes | [MIT](licenses/catppuccin-MIT.txt) |
 
 ## sxtwl
 
@@ -47,6 +48,14 @@ pip's copyright notice is `Copyright (c) 2008-present The pip developers (see AU
 ## FreeType
 
 This software is based in part on the work of the FreeType Team. Bundled FreeType 2.14.3 uses its FTL license option. The [license text](licenses/freetype-FTL.txt) comes from [FTL.TXT in the corresponding upstream release](https://github.com/freetype/freetype/blob/VER-2-14-3/docs/FTL.TXT), supplementing the license text omitted from the current Conda runtime subpackage.
+
+## Catppuccin palette
+
+This project uses the Latte, Frappé, Macchiato, and Mocha colors from the [official Catppuccin palette](https://github.com/catppuccin/palette/blob/main/palette.json), checked on 2026-10-26. The Qt theme-switching and widget-color implementation is written for this project.
+
+- Copyright notice: `Copyright (c) 2021 Catppuccin`.
+- License: [MIT text](licenses/catppuccin-MIT.txt), taken from the [official palette repository's LICENSE](https://github.com/catppuccin/palette/blob/main/LICENSE).
+- Color roles follow the [official style guide](https://github.com/catppuccin/catppuccin/blob/main/docs/style-guide.md).
 
 ## Distribution notes
 

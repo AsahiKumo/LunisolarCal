@@ -2,9 +2,9 @@
 
 简体中文 | [English](THIRD_PARTY_NOTICES.en.md)
 
-本项目使用以下第三方软件。各组件保留原作者的版权和许可条件，项目自身的 [MIT 许可证](LICENSE) 不改变这些条件。许可原文收录于 [licenses](licenses/) 目录。
+本项目使用以下第三方软件与配色数据。各组件保留原作者的版权和许可条件，项目自身的 [MIT 许可证](LICENSE) 不改变这些条件。许可原文收录于 [licenses](licenses/) 目录。
 
-以下版本对应当前 Windows 64 位 Pixi 环境，具体版本见 `pixi.lock`。核对日期：2026-10-24。
+以下软件版本对应当前 Windows 64 位 Pixi 环境，具体版本见 `pixi.lock`。软件版本核对日期：2026-10-24；Catppuccin 色板的来源与核对日期见对应小节。
 
 | 组件 | 版本 | 用途 | 许可与原文 |
 | --- | --- | --- | --- |
@@ -15,6 +15,7 @@
 | pip | 26.2.2 | 环境中的包管理工具 | [MIT](licenses/pip-MIT.txt) |
 | PyInstaller | 6.22.3 | Windows 打包工具 | [GPLv2 及引导程序例外](https://pyinstaller.org/en/stable/license.html) |
 | FreeType | 2.14.3 | Qt 字体渲染依赖 | [FTL](licenses/freetype-FTL.txt) |
+| Catppuccin 色板 | 色板数据（2026-10-26） | 四套自定义主题配色 | [MIT](licenses/catppuccin-MIT.txt) |
 
 ## sxtwl
 
@@ -47,6 +48,14 @@ pip 的版权声明为 `Copyright (c) 2008-present The pip developers (see AUTHO
 ## FreeType
 
 本软件部分基于 FreeType 团队的工作。随包的 FreeType 2.14.3 使用其 FTL 许可选项；[许可原文](licenses/freetype-FTL.txt) 取自[该版本上游的 FTL.TXT](https://github.com/freetype/freetype/blob/VER-2-14-3/docs/FTL.TXT)，用于补齐当前 Conda 运行库子包未附带的许可文本。
+
+## Catppuccin 色板
+
+本项目使用 [Catppuccin 官方色板](https://github.com/catppuccin/palette/blob/main/palette.json)中的 Latte、Frappé、Macchiato 和 Mocha 色值，核对日期为 2026-10-26。Qt 主题切换和控件配色代码由本项目实现。
+
+- 版权声明：`Copyright (c) 2021 Catppuccin`。
+- 许可：[MIT 原文](licenses/catppuccin-MIT.txt)，取自[官方色板仓库 LICENSE](https://github.com/catppuccin/palette/blob/main/LICENSE)。
+- 配色用途参考[官方风格指南](https://github.com/catppuccin/catppuccin/blob/main/docs/style-guide.md)。
 
 ## 分发说明
 

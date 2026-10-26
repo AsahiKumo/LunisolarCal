@@ -106,6 +106,55 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="themeLabel">
+        <property name="text">
+         <string>主题：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="themeCombo">
+        <property name="sizeAdjustPolicy">
+         <enum>QComboBox::SizeAdjustPolicy::AdjustToContents</enum>
+        </property>
+        <item>
+         <property name="text">
+          <string>跟随系统</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>浅色</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>深色</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Latte（浅色）</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Frappé（深色）</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Macchiato（深色）</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Mocha（深色）</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer_5">
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
@@ -419,6 +468,7 @@
  </widget>
  <tabstops>
   <tabstop>langCombo</tabstop>
+  <tabstop>themeCombo</tabstop>
   <tabstop>calCombo</tabstop>
   <tabstop>yearSpin</tabstop>
   <tabstop>monthSpin</tabstop>

@@ -1,6 +1,6 @@
 """供命令行和桌面界面共用的历法转换接口。"""
 
-__version__ = "1.3.0"
+__version__ = "1.3.1pre1"
 
 from .core import (
     CalendarError,

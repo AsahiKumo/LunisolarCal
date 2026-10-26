@@ -11,6 +11,7 @@ A solar-lunisolar calendar converter with a bilingual Qt desktop app, a CLI, and
 > **第一次使用？** 从[快速开始](#快速开始)入手。Windows 桌面版解压即可运行，无需安装 Python 或 Pixi；开发与打包说明在[开发者](#开发者)部分。
 
 - 桌面界面支持简体中文、英文和跟随系统语言。
+- 主题支持跟随系统、浅色、深色，以及 Catppuccin 的四套配色。
 - 支持填入今天、中文农历表示、复制结果和键盘快捷键。
 - 可在“关于”窗口查看版本、项目地址及本地许可说明。
 
@@ -18,7 +19,7 @@ A solar-lunisolar calendar converter with a bilingual Qt desktop app, a CLI, and
 
 ## 目录
 
-**使用者：** [快速开始](#快速开始) · [桌面操作](#桌面操作) · [命令行](#命令行) · [常见问题](#常见问题) · [历法范围与约定](#历法范围与约定)
+**使用者：** [快速开始](#快速开始) · [界面一览](#界面一览) · [桌面操作](#桌面操作) · [命令行](#命令行) · [常见问题](#常见问题) · [历法范围与约定](#历法范围与约定)
 
 **开发者：** [环境与依赖](#环境与依赖) · [项目结构](#项目代码结构) · [界面与图标](#修改界面与图标) · [界面翻译](#维护界面翻译) · [Python 接口](#程序接口) · [测试](#测试) · [Windows 打包](#windows-打包)
 
@@ -55,6 +56,14 @@ A solar-lunisolar calendar converter with a bilingual Qt desktop app, a CLI, and
 
 下文所有命令均在项目根目录执行。只使用桌面 ZIP 时，按上面的步骤打开程序即可。
 
+### 界面一览
+
+| 浅色 | 深色 |
+| :---: | :---: |
+| <img src="docs/images/gui-zh-cn-light.jpg" width="360" alt="LunisolarCal 简体中文浅色界面，显示公历 2024-02-10 对应的农历正月初一"> | <img src="docs/images/gui-zh-cn-dark.jpg" width="360" alt="LunisolarCal 简体中文深色界面，显示公历 2024-02-10 对应的农历正月初一"> |
+
+*Windows 原生浅色、深色主题的实际运行截图。示例：公历 `2024-02-10` → 农历 2024 年正月初一。*
+
 ### 桌面操作
 
 1. 选择输入历法：公历或农历。
@@ -71,9 +80,12 @@ A solar-lunisolar calendar converter with a bilingual Qt desktop app, a CLI, and
 | 今天 | 保留当前输入历法，填入今天对应的日期并转换 |
 | 复制结果 | 复制最近一次成功转换的结果；输入变化或转换失败后禁用 |
 | 界面语言 | 选择简体中文、英文或跟随系统；中文农历表示可独立选择 |
+| 主题 | 原生模式：跟随系统、浅色、深色；Catppuccin：Latte、Frappé、Macchiato、Mocha。切换时保留当前输入和转换结果 |
 | 关于 → 许可说明 | 查看项目信息、第三方组件说明及许可原文；Markdown 说明支持格式化显示 |
 
-“跟随系统”按系统界面语言偏好匹配中英文。当前所有中文语言变体（含繁体中文地区）均使用简体中文；未匹配到支持的语言时回退英文。
+界面语言中的“跟随系统”按系统界面语言偏好匹配中英文。当前所有中文语言变体（含繁体中文地区）均使用简体中文；未匹配到支持的语言时回退英文。
+
+主题默认跟随系统应用配色，也可以选择原生浅色、深色，或 Catppuccin 色板。Latte 为浅色，Frappé、Macchiato、Mocha 为深色。切换只作用于本程序；重新启动后恢复跟随系统。色板来源及许可见 [Catppuccin 说明](THIRD_PARTY_NOTICES.md#catppuccin-色板)。
 
 | 快捷键 | 操作 |
 | --- | --- |
@@ -163,6 +175,7 @@ LunisolarCal/
 │  ├─ cli.py            # 命令行
 │  ├─ gui.py            # 桌面界面与事件处理
 │  ├─ formatting.py     # 日期格式与错误提示格式化
+│  ├─ themes.py         # 原生与 Catppuccin 主题配色
 │  ├─ ui_converter.py   # 由 uic 生成
 │  ├─ resources_rc.py   # 由 rcc 生成
 │  ├─ i18n/
@@ -174,9 +187,12 @@ LunisolarCal/
 │     └─ icons/         # 图标
 ├─ tests/
 │  ├─ test_core.py      # 核心测试
-│  └─ test_cli.py       # 命令行测试
+│  ├─ test_cli.py       # 命令行测试
+│  └─ test_themes.py    # 隐藏窗口中的主题与状态测试
 ├─ tools/
 │  └─ build_windows.py  # Windows 打包脚本
+├─ docs/
+│  └─ images/           # 中英文界面截图
 ├─ lunisolartr.py       # 兼容命令行入口
 ├─ README.md
 ├─ README.en.md
@@ -191,6 +207,8 @@ LunisolarCal/
 </details>
 
 核心接口与格式化模块不依赖 Qt，命令行和桌面窗口共用同一套日期校验与转换逻辑。输入年份上下限由 `core.py` 的 `MIN_INPUT_YEAR`、`MAX_INPUT_YEAR` 定义，GUI 在初始化时也使用这个范围。调整范围前，应核对转换库的能力和边界行为。
+
+`themes.py` 集中管理主题色值与角色映射。Catppuccin 使用 Qt Fusion 样式统一应用调色板，转换按钮与图标使用强调配色；切回跟随系统、浅色或深色时，恢复启动时的原生样式与配色。
 
 ### 修改界面与图标
 
@@ -275,11 +293,13 @@ solar = lunisolar_to_solar(2023, 2, 1, is_leap=True)
 pixi run test
 ```
 
-自动化测试覆盖核心转换、日期校验、错误提示格式化和命令行行为，全部通过时显示 `OK`。界面还应手动核对双向转换、错误提示、今天与复制按钮、键盘操作、语言切换以及关于和许可窗口。
+自动化测试覆盖核心转换、日期校验、错误提示格式化、命令行行为，以及主题配色、原生配色恢复和输入结果保持。主题测试中的窗口始终隐藏，全部通过时显示 `OK`。界面还应手动核对双向转换、错误提示、今天与复制按钮、键盘操作、语言与主题切换，以及关于和许可窗口。
 
 ### 版本维护
 
 软件版本号位于 `lunisolar_cal/__init__.py` 的 `__version__`，关于窗口从这里读取；`pixi.toml` 的 `workspace.version` 是项目元数据。发布新版本时保持两处一致。
+
+预发布版本可写作 `1.3.1pre1`。打包时，Windows 内部数值版本为 `1.3.1.0`，显示版本和 ZIP 文件名保留 `pre1` 后缀，并设置预发布标记。
 
 ### Windows 打包
 
@@ -289,7 +309,7 @@ pixi run test
 pixi run build
 ```
 
-脚本重新编译英文翻译，生成带图标和版本信息的桌面程序，并复制中英文说明、项目许可和第三方许可材料。输出位于：
+脚本重新编译英文翻译，生成带图标和版本信息的桌面程序，并复制中英文说明、界面截图、项目许可和第三方许可材料。输出位于：
 
 ```text
 dist/
@@ -297,6 +317,7 @@ dist/
 │  ├─ LunisolarCal.exe
 │  ├─ _internal/          # Python、Qt 和其他运行库
 │  ├─ licenses/           # 许可文本及依赖包提供的构建材料
+│  ├─ docs/images/        # README 界面截图
 │  ├─ BUNDLED_COMPONENTS.md
 │  └─ ...                 # 中英文 README 与第三方说明、LICENSE
 ├─ LunisolarCal-<版本号>-win64.zip
