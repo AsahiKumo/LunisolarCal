@@ -1,38 +1,61 @@
-# 公农历转换工具
+# LunisolarCal · 公农历转换
 
-简体中文 | [English](README.en.md)
+**简体中文** | [English](README.en.md)
 
-A solar-lunisolar calendar converter with a Qt desktop interface and a command-line interface. It supports leap months, date validation, and a Chinese/English desktop interface. See the [English documentation](README.en.md) for installation and usage.
+A solar-lunisolar calendar converter with a bilingual Qt desktop app, a CLI, and a Python API. See the [English documentation](README.en.md) for installation and usage.
 
 基于 `sxtwl` 的公历、农历双向转换工具，提供 Qt 桌面窗口、命令行和 Python 调用接口，支持闰月输入与日期校验。
 
-> 应该没有人会用我的这个东西吧……
+本项目开发过程中使用了 OpenAI Codex 辅助编程、调试、文档整理和 UI 图标制作。
+
+> **第一次使用？** 从[快速开始](#快速开始)入手。Windows 桌面版解压即可运行，无需安装 Python 或 Pixi；开发与打包说明在[开发者](#开发者)部分。
 
 - 桌面界面支持简体中文、英文和跟随系统语言。
 - 支持填入今天、中文农历表示、复制结果和键盘快捷键。
 - 可在“关于”窗口查看版本、项目地址及本地许可说明。
 
-文档导航：[使用者](#使用者) · [开发者](#开发者) · [其他信息](#其他信息)
+> 应该没有人会用我的这个东西吧……
+
+## 目录
+
+**使用者：** [快速开始](#快速开始) · [桌面操作](#桌面操作) · [命令行](#命令行) · [常见问题](#常见问题) · [历法范围与约定](#历法范围与约定)
+
+**开发者：** [环境与依赖](#环境与依赖) · [项目结构](#项目代码结构) · [界面与图标](#修改界面与图标) · [界面翻译](#维护界面翻译) · [Python 接口](#程序接口) · [测试](#测试) · [Windows 打包](#windows-打包)
+
+**其他：** [许可证与第三方组件](#许可证与第三方组件) · [参考资料](#参考资料) · [问题反馈](https://github.com/AsahiKumo/LunisolarCal/issues)
+
+---
 
 ## 使用者
 
-### 首次运行
+### 快速开始
 
-Windows 64 位桌面包可解压整个 ZIP 后，双击其中的 `LunisolarCal.exe` 启动，无需安装 Python 或 Pixi。请保留旁边的 `_internal`、`licenses` 及说明文件；移动或分享时保留整个文件夹。
+#### Windows 桌面版
 
-从源码运行时，先安装 [Pixi](https://pixi.prefix.dev/latest/installation/)，再在项目根目录（`pixi.toml` 所在目录）打开 PowerShell，安装运行环境：
+1. **下载。** 从 [Releases](https://github.com/AsahiKumo/LunisolarCal/releases/latest) 下载 `LunisolarCal-<版本号>-win64.zip`。
+2. **解压。** 将 ZIP 中的全部文件解压到一个文件夹。
+3. **运行。** 双击文件夹中的 `LunisolarCal.exe`，打开转换窗口。
 
-```powershell
-pixi install --locked
-```
+无需安装 Python 或 Pixi。请保留旁边的 `_internal`、`licenses` 及说明文件；移动或分享时保留整个文件夹。
 
-下文所有命令均在项目根目录执行。
+#### 从源码运行
 
-### 桌面窗口
+1. 安装 [Pixi](https://pixi.prefix.dev/latest/installation/)。
+2. 在项目根目录（`pixi.toml` 所在目录）打开 PowerShell，安装运行环境：
 
-```powershell
-pixi run python -m lunisolar_cal.gui
-```
+   ```powershell
+   pixi install --locked
+   ```
+
+3. 启动桌面窗口：
+
+   ```powershell
+   pixi run python -m lunisolar_cal.gui
+   ```
+
+下文所有命令均在项目根目录执行。只使用桌面 ZIP 时，按上面的步骤打开程序即可。
+
+### 桌面操作
 
 1. 选择输入历法：公历或农历。
 2. 填写年、月、日；输入农历闰月时勾选“闰月”。
@@ -93,6 +116,18 @@ pixi run cal ls --help
 
 命令行的提示、帮助和输出目前使用中文；桌面窗口中的语言选择只作用于 GUI。
 
+### 常见问题
+
+| 现象 | 处理方法 |
+| --- | --- |
+| 下载后找不到 `LunisolarCal.exe` | 选择 Releases 中的 `LunisolarCal-<版本号>-win64.zip`。GitHub 自动生成的 `Source code` 是源码，需要按[从源码运行](#从源码运行)配置环境 |
+| 闰月选项无法勾选 | 先将输入历法切换为“农历”；输入公历时该选项会自动禁用 |
+| 修改日期后结果变成“等待转换”，无法复制 | 重新点击“转换”。复制按钮仅在最近一次转换成功后可用 |
+| 英文界面下仍显示“闰二月”“初一”等中文日期 | 取消勾选 `Chinese lunisolar notation`。界面语言与中文农历表示可以分别选择 |
+| 日期提示不存在，或闰月日期无法转换 | 检查当月天数、闰月选项及该年是否有对应闰月。1582 年改历缺口等规则见[历法范围与约定](#历法范围与约定) |
+
+仍有问题时，可在 [Issues](https://github.com/AsahiKumo/LunisolarCal/issues) 反馈，附上软件版本、输入历法、年月日、闰月选项、界面语言和错误提示，方便复现。
+
 ### 历法范围与约定
 
 - **输入年份为 `1～9999`**。跨年转换的输出可能为农历 0 年或公历 10000 年，这类结果超出当前可输入范围。
@@ -101,10 +136,6 @@ pixi run cal ls --help
 - 年份范围表示程序接受的输入范围；整个范围尚未逐年通过独立历表核对。
 
 ## 开发者
-
-### 开发说明
-
-本项目开发过程中使用了 OpenAI Codex 辅助编程、调试、文档整理和 UI 图标制作。
 
 ### 环境与依赖
 
@@ -119,6 +150,9 @@ pixi run cal ls --help
 | PyInstaller | `>=6,<7` | conda | 生成 Windows 桌面包 |
 
 ### 项目代码结构
+
+<details>
+<summary>展开项目目录</summary>
 
 ```text
 LunisolarCal/
@@ -153,6 +187,8 @@ LunisolarCal/
 ├─ pixi.toml
 └─ pixi.lock
 ```
+
+</details>
 
 核心接口与格式化模块不依赖 Qt，命令行和桌面窗口共用同一套日期校验与转换逻辑。输入年份上下限由 `core.py` 的 `MIN_INPUT_YEAR`、`MAX_INPUT_YEAR` 定义，GUI 在初始化时也使用这个范围。调整范围前，应核对转换库的能力和边界行为。
 

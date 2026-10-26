@@ -1,36 +1,59 @@
-# Solar-Lunisolar Calendar Converter
+# LunisolarCal
 
-[简体中文](README.md) | English
+[简体中文](README.md) | **English**
 
 A solar-lunisolar calendar converter based on `sxtwl`, with a Qt desktop interface, a command-line interface, and a Python API. It supports leap-month input and date validation.
 
-> Probably no one is going to use this thing of mine anyway...
+OpenAI Codex was used during development to assist with coding, debugging, documentation, and UI icons.
+
+> **First time here?** Start with [Quick start](#quick-start). Extract and run the Windows desktop bundle; no Python or Pixi installation is required. Development and packaging instructions are in [Developers](#developers).
 
 - The desktop interface supports Simplified Chinese, English, and system language matching.
 - Features include today's date, Chinese lunisolar notation, copying results, and keyboard shortcuts.
 - The About dialog provides version information, the project homepage, and a local license viewer.
 
-Documentation: [Users](#users) · [Developers](#developers) · [Other information](#other-information)
+> Probably no one is going to use this thing of mine anyway...
+
+## Contents
+
+**Users:** [Quick start](#quick-start) · [Desktop interface](#using-the-desktop-interface) · [Command line](#command-line) · [Troubleshooting](#troubleshooting) · [Calendar conventions](#supported-years-and-calendar-conventions)
+
+**Developers:** [Dependencies](#environment-and-dependencies) · [Project structure](#project-structure) · [UI and icons](#editing-the-interface-and-icons) · [Translations](#maintaining-interface-translations) · [Python API](#python-api) · [Tests](#tests) · [Packaging](#windows-packaging)
+
+**Other:** [Licenses](#license-and-third-party-components) · [References](#references) · [Report an issue](https://github.com/AsahiKumo/LunisolarCal/issues)
+
+---
 
 ## Users
 
-### First run
+### Quick start
 
-For the 64-bit Windows desktop bundle, extract the entire ZIP and double-click `LunisolarCal.exe`. Python and Pixi are not required. Keep the adjacent `_internal` and `licenses` directories and documentation files; move or share the entire folder together.
+#### Windows desktop app
 
-To run from source, install [Pixi](https://pixi.prefix.dev/latest/installation/), then open PowerShell in the project root (the directory containing `pixi.toml`) and install the environment:
+1. **Download.** Get `LunisolarCal-<version>-win64.zip` from [Releases](https://github.com/AsahiKumo/LunisolarCal/releases/latest).
+2. **Extract.** Extract all files from the ZIP into a folder.
+3. **Run.** Double-click `LunisolarCal.exe` inside that folder to open the converter.
 
-```powershell
-pixi install --locked
-```
+Python and Pixi are not required. Keep the adjacent `_internal` and `licenses` directories and documentation files; move or share the entire folder together.
 
-Run all commands below from the project root.
+#### Run from source
 
-### Desktop interface
+1. Install [Pixi](https://pixi.prefix.dev/latest/installation/).
+2. Open PowerShell in the project root (the directory containing `pixi.toml`) and install the environment:
 
-```powershell
-pixi run python -m lunisolar_cal.gui
-```
+   ```powershell
+   pixi install --locked
+   ```
+
+3. Start the desktop interface:
+
+   ```powershell
+   pixi run python -m lunisolar_cal.gui
+   ```
+
+Run all commands below from the project root. To use the desktop ZIP, follow the Windows steps above.
+
+### Using the desktop interface
 
 1. Select the input calendar: Solar or Lunisolar.
 2. Enter the year, month, and day. Select "Leap month (lunisolar)" when entering a leap month.
@@ -91,6 +114,18 @@ pixi run cal ls --help
 
 The CLI currently uses Chinese prompts, help text, and output. The desktop language setting applies only to the GUI.
 
+### Troubleshooting
+
+| Symptom | What to do |
+| --- | --- |
+| The download does not contain `LunisolarCal.exe` | Choose `LunisolarCal-<version>-win64.zip` from Releases. GitHub's automatically generated `Source code` archives require the [source environment](#run-from-source) |
+| The leap-month option is disabled | Select Lunisolar as the input calendar. This option is disabled for solar input |
+| Changing the date resets the result and disables copying | Click Convert again. Copy result is available only after a successful conversion |
+| The English interface still shows Chinese date names such as `闰二月` or `初一` | Uncheck `Chinese lunisolar notation`. The interface language and date notation are separate settings |
+| A date or leap month is rejected | Check the month length, leap-month selection, and whether that year has the requested leap month. See [calendar conventions](#supported-years-and-calendar-conventions) for the 1582 reform gap and other rules |
+
+If the problem persists, [open an issue](https://github.com/AsahiKumo/LunisolarCal/issues) with the application version, input calendar, date, leap-month selection, interface language, and error message so it can be reproduced.
+
 ### Supported years and calendar conventions
 
 - **Input years range from `1` to `9999`.** Conversions across a year boundary may produce lunisolar year 0 or solar year 10000, which are outside the accepted input range.
@@ -99,10 +134,6 @@ The CLI currently uses Chinese prompts, help text, and output. The desktop langu
 - The year range describes accepted input. The entire range has not been checked year by year against independent calendar tables.
 
 ## Developers
-
-### Development assistance
-
-OpenAI Codex was used during development to assist with coding, debugging, documentation, and UI icons.
 
 ### Environment and dependencies
 
@@ -117,6 +148,9 @@ Pixi manages the runtime and development tools, including Designer and Linguist.
 | PyInstaller | `>=6,<7` | conda | Windows desktop packaging |
 
 ### Project structure
+
+<details>
+<summary>Expand the project directory</summary>
 
 ```text
 LunisolarCal/
@@ -151,6 +185,8 @@ LunisolarCal/
 ├─ pixi.toml
 └─ pixi.lock
 ```
+
+</details>
 
 The core API and formatting module do not depend on Qt. The CLI and desktop interface share the same date validation and conversion logic. `MIN_INPUT_YEAR` and `MAX_INPUT_YEAR` in `core.py` define the accepted input range; the GUI uses the same limits during initialization. Check the conversion library's capabilities and boundary behavior before changing these limits.
 
